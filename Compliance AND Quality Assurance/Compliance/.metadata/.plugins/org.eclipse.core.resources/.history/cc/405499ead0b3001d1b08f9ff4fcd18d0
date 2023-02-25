@@ -1,0 +1,37 @@
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class TesteCalculadora {
+
+	private final Calculadora cal = new Calculadora();
+
+	@Test
+	public void testaSomaCalculadora2Soma3() {
+		assertEquals(cal.somar(2, 3), 5);
+	}
+
+	@Test
+	public void testaSubstracaoCalculadora2Substrair3() {
+		assertEquals(cal.substrair(2, 3), -1);
+	}
+
+	@Test
+	public void testaMultiplicaoCalculadora2Multiplacado3() {
+		assertEquals(cal.multiplicar(2, 3), 6);
+	}
+
+	@Test
+	public void testeDivisaoCalculadora6Dividido2() {
+		assertEquals(cal.dividir(6, 2), 3);
+
+	}
+
+	@Test
+	public void testeDivisaoPorZeroCalculadora6Dividido0() {
+		assertEquals(cal.dividir(6, 0), -1);
+
+	}
+
+}

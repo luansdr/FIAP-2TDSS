@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+D:\FIAP-2TDSS\Compliance AND Quality Assurance\Compliance\.metadata\.plugins\org.eclipse.jdt.core
+1509799344.index
+137900986.index
+4228940625.index
+1865797976.index
+3653084250.index

@@ -1,0 +1,23 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TesteMensagemBoasVindas extends MensagemBoasVindas {
+	
+	
+	
+	public MensagemBoasVindas mensagens;
+
+	@Test
+	void testeMensagemPadrao() {
+		mensagens = new MensagemBoasVindas("Luan Reis");
+		assertEquals(mensagens.mensagemPadrao(), "Seja bem vindo á sua calculadora digital");
+	}
+	
+	@Test
+	void testeMensagemPadraoComNome() {
+		mensagens = new MensagemBoasVindas("Luan Reis");
+		assertEquals(mensagens.mensagemPadraoComNome(), "Luan Reis" + "!\n" + "Confira os resultados dos testes no painel da JUNIT!");
+	}
+
+}

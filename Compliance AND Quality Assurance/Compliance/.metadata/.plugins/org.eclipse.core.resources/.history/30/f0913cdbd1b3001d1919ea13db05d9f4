@@ -1,0 +1,30 @@
+
+public class MensagemBoasVindas {
+
+	private String nome;
+
+	public MensagemBoasVindas(String nome) {
+		this.nome = nome;
+	}
+
+	public String getMensagem() {
+		return nome;
+	}
+
+	public void setMensagem(String nome) {
+		this.nome = nome;
+	}
+
+	public String mensagemPadrao() {
+		String ms = "Seja bem vindo á sua calculadora digital";
+		System.out.println(ms);
+		return ms;
+	}
+
+	public String mensagemPadraoComNome() {
+		String ms = this.nome + "!\n" + "Confira os resultados dos testes no painel da JUNIT!";
+		System.out.println(ms);
+		return ms;
+	}
+
+}

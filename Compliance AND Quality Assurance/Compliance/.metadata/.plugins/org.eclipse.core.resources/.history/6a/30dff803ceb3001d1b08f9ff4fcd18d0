@@ -1,0 +1,16 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TesteMensagemBoasVindas {
+	
+	
+	
+	public MensagemBoasVindas mensagens;
+
+	@Test
+	void testeMensagemPadrao() {
+		fail("Not yet implemented");
+	}
+
+}

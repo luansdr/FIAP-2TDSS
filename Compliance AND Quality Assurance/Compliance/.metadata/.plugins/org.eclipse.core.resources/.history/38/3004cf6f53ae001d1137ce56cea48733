@@ -1,0 +1,43 @@
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class TesteCalculadora extends Calculadora {
+
+	@Test
+	public void testaSomaCalculadoraDoisSomaTres() {
+		assertEquals(somar(2, 3), 5);
+		
+
+	}
+	
+	
+	@Test
+	public void testaSubstracaoCalculadora() {
+		assertEquals(substrair(2, 3), -1);
+
+	}
+
+	
+	@Test
+	public void testaMultiplicaoCalculadora() {
+		assertEquals(multiplicar(2, 3), 6);
+
+	}
+	
+	@Test
+	public void testeDivisaoCalculadora() {
+		assertEquals(dividir(6, 2), 3);
+
+	}
+	
+	@Test
+	public void testeDivisaoPorZeroCalculadora() {
+		assertEquals(dividir(6, 0), -1);
+
+	}
+
+	
+	
+}
