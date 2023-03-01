@@ -1,16 +1,17 @@
 package br.com.fiap.model;
 
 import br.com.fiap.anotation.Coluna;
-
+import br.com.fiap.anotation.Tabela;
+@Tabela(nome = "TB_PESSOA")
 public class Pessoa {
 
-	@Coluna("TB_PESSOA_NOME")
+	@Coluna(nome = "TB_PESSOA_NOME")
 	private String nome;
 
-	@Coluna("TB_PESSOA_IDADE")
+	@Coluna(nome =  "TB_PESSOA_IDADE")
 	private int idade;
 
-	@Coluna("TB_PESSOA_ALTURA")
+	@Coluna(nome =  "TB_PESSOA_ALTURA")
 	private double altura;
 
 	public Pessoa(String nome, int idade, double altura) {

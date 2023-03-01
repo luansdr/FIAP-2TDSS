@@ -31,6 +31,7 @@ public class TesteContas {
 
 //		** Passo 4 -> Criar uma Lista de contas correntes; **
 		List<ContaCorrente> contasCorrentes = new ArrayList<ContaCorrente>();
+		
 
 //		** Passo 5 -> Adicionar 3 contasCorrentes; **
 		contasCorrentes.add(cc);
@@ -39,6 +40,7 @@ public class TesteContas {
 
 //	    ** Passo 6 - Exibir os saldos das contas; **
 		contasCorrentes.forEach(c -> System.out.println("Saldo: R$" + c.getSaldo()));
+		
 
 	}
 
