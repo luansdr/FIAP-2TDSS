@@ -22,6 +22,7 @@ import javax.persistence.Transient;
 public class Cliente {
 
 	@Id
+	@Column(name = "id_cliente")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente")
 	private Integer id;
 
