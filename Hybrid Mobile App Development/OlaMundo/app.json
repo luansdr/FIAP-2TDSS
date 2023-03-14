@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "OlaMundo",
+    "slug": "OlaMundo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/91685.jpg",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/91685.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#aaaa"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/91685.jpg",
+        "backgroundColor": "#aaaa"
+      }
+    },
+    "web": {
+      "favicon": "./assets/91685.jpg"
+    }
+  }
+}
