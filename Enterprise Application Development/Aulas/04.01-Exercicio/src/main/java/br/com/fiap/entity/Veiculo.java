@@ -13,19 +13,29 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "veiculo", sequenceName = "SQ_TAB_VEICULO", allocationSize = 1)
 public class Veiculo {
 
-	
 	@Id
+	@Column(name = "cd_veiculo")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "veiculo")
 	private Integer id;
-	
-	@Column(name="ds_placa", length = 9, nullable = false)
+
+	@Column(name = "ds_placa", length = 9, nullable = false)
 	private String placa;
-	
-	@Column(name="ds_cor", length = 20, nullable = false)
+
+	@Column(name = "ds_cor", length = 20, nullable = false)
 	private String cor;
-	
-	@Column(name="nr_ano", nullable = false)
+
+	@Column(name = "nr_ano", nullable = true)
 	private int ano;
+
+	public Veiculo(String placa, String cor, int ano) {
+		this.placa = placa;
+		this.cor = cor;
+		this.ano = ano;
+	}
+
+	public Veiculo() {
+		super();
+	}
 
 	public Integer getId() {
 		return id;
@@ -58,7 +68,12 @@ public class Veiculo {
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Veiculo [id=" + id + ", placa=" + placa + ", cor=" + cor + ", ano=" + ano + "]";
+	}
+
 	
 	
 	

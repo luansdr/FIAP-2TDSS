@@ -1,5 +1,6 @@
 package br.com.fiap.entity;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -21,26 +22,37 @@ import javax.persistence.TemporalType;
 public class Motorista {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "motorista")
+	@Column(name = "nr_carteira")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "motorista")
 	private Integer id;
-	
+
 	@Column(name = "nm_motorista", length = 120, nullable = false)
 	private String nome;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_nascimento")
 	private Calendar dataNascimento;
-	
+
 	@Lob
 	@Column(name = "fl_cateira")
 	private byte[] fotoCarteira;
-	
+
 	@Enumerated
 	@Column(name = "ds_genero", length = 20)
 	private Genero genero;
 
-	
-	
+	public Motorista(int id, String nome, Calendar dataNascimento, byte[] fotoCarteira, Genero genero) {
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.fotoCarteira = fotoCarteira;
+		this.genero = genero;
+	}
+
+	public Motorista() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -80,8 +92,13 @@ public class Motorista {
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Motorista [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", fotoCarteira="
+				+ Arrays.toString(fotoCarteira) + ", genero=" + genero + "]";
+	}
+
 	
 	
 }
