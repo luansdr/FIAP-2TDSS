@@ -10,10 +10,12 @@ import javax.persistence.Persistence;
 import br.com.fiap.dao.ClienteDaoImpl;
 import br.com.fiap.entity.Cliente;
 import br.com.fiap.entity.Genero;
+import br.com.fiap.exception.CommitException;
+import br.com.fiap.exception.IdNotFoundExpcetion;
 
 public class TesteClienteEmpl {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CommitException, IdNotFoundExpcetion {
 		// TODO Auto-generated method stub
 
 		// ClienteIMPL

@@ -1,5 +1,7 @@
 package br.com.fiap.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,6 +26,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "TB_CLIENTE")
 @SequenceGenerator(name = "cliente", sequenceName = "SQ_TAB_CLIENTE", allocationSize = 1)
 public class Cliente {
+	
+	
 
 	@Id
 	@Column(name = "id_cliente")
@@ -143,12 +148,25 @@ public class Cliente {
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
+	
+	
+	@PrePersist
+	private void executar() {
+		System.out.println("Hello World");
+	}
+	
+	public String formatadorDate(Calendar data) {
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return df.format(data.getTime());
+	}
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", credito=" + credito + ", dataNascimento=" + dataNascimento
-				+ ", dt_cadastro=" + dt_cadastro + ", cpf=" + cpf + ", idade=" + idade + ", foto="
-				+ Arrays.toString(foto) + ", genero=" + genero + "]";
+		return "Cliente [id= " + id + ", nome= " + nome + ", credito= " + credito + ", dataNascimento= " + formatadorDate(dataNascimento)
+				+ ", dt_cadastro= " + formatadorDate(dt_cadastro) + ", cpf= " + cpf + ", idade= " + idade + ", foto= "
+				+ Arrays.toString(foto) + ", genero= " + genero + "]";
 	}
 	
 	
