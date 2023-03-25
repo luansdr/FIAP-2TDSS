@@ -8,7 +8,7 @@ import br.com.fiap.exception.IdNotFoundExpcetion;
 
 public interface ClienteDao {
 
-	public Cliente cadastrar(Cliente cliente) throws CommitException;
+	public Cliente cadastrarOuCadastrar(Cliente cliente) throws CommitException;
 
 	public Cliente atualizar(Cliente cliente) throws IdNotFoundExpcetion, CommitException;
 
