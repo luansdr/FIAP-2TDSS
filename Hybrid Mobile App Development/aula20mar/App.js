@@ -10,9 +10,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Entre com seu nome</Text>
-      <TextInput onChangeText={setNome} autoFocus={true} style={styles.textInputEmail} placeholder='Informe seu nome' />
+      <TextInput  onChangeText={setNome} autoFocus={true} style={styles.textInputEmail} placeholder='Informe seu nome' />
       <Button color="black"  onPress={_ => { nome ? alert(`Ola ${nome}`) : alert("informe seu nome")}} title={(1 == 1) ? "Entra aqui" : "Sair"} />
       <StatusBar style="auto" />
+      <Text>{nome}</Text>
     </View>
   );
 
