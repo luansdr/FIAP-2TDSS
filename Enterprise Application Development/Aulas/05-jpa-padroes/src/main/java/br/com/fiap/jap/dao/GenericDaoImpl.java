@@ -1,7 +1,6 @@
 package br.com.fiap.jap.dao;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -46,7 +45,10 @@ public abstract class GenericDaoImpl<T, K>  implements GenericDao<T, K> {
 
 
 	public void commit() throws CommitException {
-		// TODO Auto-generated method stub
+		
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+
 		
 	}
 
