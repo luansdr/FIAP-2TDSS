@@ -19,7 +19,7 @@ public class View {
 		InvestimentoDaoImpl investDao = new InvestimentoDaoImpl(em);
 		
 		
-		Investimento investimentoAdd = new Investimento("CDI PICPAY", 7.4,  Tipo.CDI);
+		Investimento investimentoAdd = new Investimento("CDI PICPAs", 7.4,  Tipo.CDI);
 		
 		
 		try {
