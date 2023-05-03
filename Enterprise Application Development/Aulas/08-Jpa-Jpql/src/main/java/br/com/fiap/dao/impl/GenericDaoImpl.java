@@ -10,7 +10,7 @@ import br.com.fiap.exception.EntityNotFoundException;
 
 public abstract class GenericDaoImpl<T,K> implements GenericDao<T, K> {
 
-	private EntityManager em;
+	protected EntityManager em;
 	
 	private Class<T> clazz;
 	
@@ -35,7 +35,7 @@ public abstract class GenericDaoImpl<T,K> implements GenericDao<T, K> {
 	public void remover(K codigo) throws EntityNotFoundException {
 		T entidade = pesquisar(codigo);
 		if (entidade == null){
-			throw new EntityNotFoundException("Entidade não encontrada");
+			throw new EntityNotFoundException("Entidade nï¿½o encontrada");
 		}
 		em.remove(entidade);
 	}

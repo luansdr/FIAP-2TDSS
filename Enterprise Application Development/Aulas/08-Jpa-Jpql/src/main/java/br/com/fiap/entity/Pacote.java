@@ -97,4 +97,12 @@ public class Pacote {
 	public void setPreco(Float preco) {
 		this.preco = preco;
 	}
+
+	@Override
+	public String toString() {
+		return "Pacote:  id:" + id + ", descricao:" + descricao + ", dataSaida:" + dataSaida + ", qtdDias:" + qtdDias
+				+ ", preco:" + preco + ", transporte:" + transporte ;
+	}
+	
+	
 }
