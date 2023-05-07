@@ -98,6 +98,14 @@ public class Cliente {
 	public void setPacotes(List<Pacote> pacotes) {
 		this.pacotes = pacotes;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
+				+ ", endereco=" + endereco + ", pacotes=" + pacotes + "]";
+	}
+	
+	
 	
 	
 }

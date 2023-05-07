@@ -1,10 +1,13 @@
 package br.com.fiap.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.fiap.dao.GenericDao;
+
 import br.com.fiap.exception.CommitException;
 import br.com.fiap.exception.EntityNotFoundException;
 
@@ -26,6 +29,15 @@ public abstract class GenericDaoImpl<T,K> implements GenericDao<T, K> {
 		em.persist(entity);
 	}
 
+	
+	@Override
+	public List<T> listar() {
+//	    TypedQuery<T> query = em.createQuery("from " + clazz.getSimpleName(), clazz);
+		//Melhor jeito de fazer
+	    return em.createQuery("from " + clazz.getSimpleName(), clazz)
+	    		.getResultList();
+	}
+	
 	@Override
 	public void alterar(T entity) {
 		em.merge(entity);
@@ -55,5 +67,7 @@ public abstract class GenericDaoImpl<T,K> implements GenericDao<T, K> {
 			throw new CommitException("Erro no commit", e);
 		}
 	}
+	
+	
 
 }

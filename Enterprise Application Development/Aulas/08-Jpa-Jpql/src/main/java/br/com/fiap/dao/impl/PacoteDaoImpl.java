@@ -3,10 +3,10 @@ package br.com.fiap.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import br.com.fiap.dao.PacoteDao;
 import br.com.fiap.entity.Pacote;
+import br.com.fiap.entity.Transporte;
 
 public class PacoteDaoImpl extends GenericDaoImpl<Pacote,Integer> implements PacoteDao{
 
@@ -15,23 +15,18 @@ public class PacoteDaoImpl extends GenericDaoImpl<Pacote,Integer> implements Pac
 	}
 
 	@Override
-	public List<Pacote> listar() {
-
-		//Criar o comando SQL
-		
-		TypedQuery<Pacote> query = em.createQuery("from Pacote", Pacote.class);
-		
-		
-		//Executar o comando
-		return query.getResultList();
+	public List<Pacote> buscarPorPrecoMenor(float preco) {
+		return  em.createQuery("from Pacote p where p.preco < :precoPacote", Pacote.class)
+				.setParameter("precoPacote", preco)
+				.getResultList();
 	}
 
 	@Override
-	public List<Pacote> buscarPorPrecoMenor(float preco) {
-		
-		TypedQuery<Pacote> query = em.createQuery("from Pacote p where p.preco < :precoPacote", Pacote.class);
-		query.setParameter("precoPacote", preco);
-		return query.getResultList();
+	public List<Pacote> buscarPorTransporteEspecifico(Transporte transporte) {
+		return em.createQuery("from Pacote p where p.transporte.empresa = :transporte", Pacote.class)
+				.setParameter("transporte", transporte.getEmpresa())
+				.getResultList();
 	}
+	
 
 }

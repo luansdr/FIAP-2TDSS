@@ -27,6 +27,8 @@ public abstract class GenericDaoImpl<T, K>  implements GenericDao<T, K> {
 		
 
 	}
+	
+	
 
 	public void remover(K id) throws IdNotFoundExpcetion {
 		em.remove(id);
