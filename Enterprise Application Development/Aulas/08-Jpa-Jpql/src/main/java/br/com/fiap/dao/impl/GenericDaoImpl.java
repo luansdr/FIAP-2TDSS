@@ -4,10 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import br.com.fiap.dao.GenericDao;
-
 import br.com.fiap.exception.CommitException;
 import br.com.fiap.exception.EntityNotFoundException;
 

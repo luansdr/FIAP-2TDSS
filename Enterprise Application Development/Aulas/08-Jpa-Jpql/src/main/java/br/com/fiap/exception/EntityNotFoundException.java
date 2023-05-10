@@ -2,6 +2,11 @@ package br.com.fiap.exception;
 
 public class EntityNotFoundException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2781870748609292999L;
+
 	public EntityNotFoundException() {
 		super();
 		// TODO Auto-generated constructor stub

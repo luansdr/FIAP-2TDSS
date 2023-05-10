@@ -14,7 +14,7 @@ public class ReservaDaoImpl extends GenericDaoImpl<Reserva,Integer> implements R
 	}
 
 	@Override
-	public List<Reserva> istarPorDiasReservas(Integer dias) {
+	public List<Reserva> listarPorDiasReservas(Integer dias) {
 		return  em.createQuery("from Reserva r where r.numeroDias = :dias", Reserva.class).
 				setParameter("dias", dias)
 				.getResultList();

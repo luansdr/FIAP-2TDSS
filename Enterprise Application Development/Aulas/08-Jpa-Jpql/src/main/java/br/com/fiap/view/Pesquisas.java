@@ -23,6 +23,7 @@ public class Pesquisas {
 
 		List<Pacote> t = dao.buscarPorPrecoMenor(5000f);
 		t.forEach(c -> System.out.println(c.getDescricao() + " - R$" + c.getPreco()));
+		
 
 	}
 

@@ -73,8 +73,16 @@ public class Cidade {
 		this.nrHabitantes = nrHabitantes;
 	}
 
+	@Override
+	public String toString() {
+		return "Cidade [id=" + id + ", nome=" + nome + ", uf=" + uf + ", ddd=" + ddd + ", nrHabitantes=" + nrHabitantes
+				+ "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
+	
+	
 }

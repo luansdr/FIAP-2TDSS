@@ -24,9 +24,9 @@ public class ClienteDaoImpl extends GenericDaoImpl<Cliente,Integer> implements C
 	}
 
 	@Override
-	public List<Cliente> listarPorCidade(String cidade) {
-		return em.createQuery("from Cliente c where c.endereco.cidade.nome = :cidade", Cliente.class)
-				.setParameter("cidade", cidade)
+	public List<Cliente> listarPorEstado(String estado) {
+		return em.createQuery("from Cliente c where c.endereco.cidade.uf = :estado", Cliente.class)
+				.setParameter("estado", estado)
 				.getResultList();
 	}
 
@@ -35,15 +35,9 @@ public class ClienteDaoImpl extends GenericDaoImpl<Cliente,Integer> implements C
 
 		@Override
 		public List<Cliente> listarPorDiasReservas(Integer dias) {
-			
-			ReservaDao daoReserva = new ReservaDaoImpl(em);
-			
-			List<Reserva> reservas = daoReserva.istarPorDiasReservas(dias);
-			
-			List<Cliente> clientes = new ArrayList<Cliente>();
-			reservas.forEach(c -> clientes.add(c.getCliente()));
-			
-		    return clientes;
+			return em.createQuery("select r.cliente from Reserva r where r.numeroDias = :dias", Cliente.class)
+					.setParameter("dias", dias)
+					.getResultList();
 		}
 
 

@@ -6,6 +6,6 @@ import br.com.fiap.entity.Reserva;
 
 public interface ReservaDao extends GenericDao<Reserva,Integer>{
 	
-	List<Reserva> istarPorDiasReservas(Integer dias);
+	List<Reserva> listarPorDiasReservas(Integer dias);
 
 }

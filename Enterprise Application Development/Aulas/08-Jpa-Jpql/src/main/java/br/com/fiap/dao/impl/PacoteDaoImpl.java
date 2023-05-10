@@ -23,8 +23,9 @@ public class PacoteDaoImpl extends GenericDaoImpl<Pacote,Integer> implements Pac
 
 	@Override
 	public List<Pacote> buscarPorTransporteEspecifico(Transporte transporte) {
-		return em.createQuery("from Pacote p where p.transporte.empresa = :transporte", Pacote.class)
-				.setParameter("transporte", transporte.getEmpresa())
+		em.persist(transporte);
+		return em.createQuery("from Pacote p where p.transporte = :transporte", Pacote.class)
+				.setParameter("transporte", transporte)
 				.getResultList();
 	}
 	
