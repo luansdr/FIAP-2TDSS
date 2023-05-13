@@ -1,5 +1,7 @@
 package br.com.fiap.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.fiap.dao.CidadeDao;
@@ -10,5 +12,8 @@ public class CidadeDaoImpl extends GenericDaoImpl<Cidade,Integer> implements Cid
 	public CidadeDaoImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
+
+
+	
 
 }

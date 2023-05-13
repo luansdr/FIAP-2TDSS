@@ -36,6 +36,13 @@ public abstract class GenericDaoImpl<T,K> implements GenericDao<T, K> {
 	    		.getResultList();
 	}
 	
+	public List<T> listar(int maximoResultado, int primeiraPosicao) {
+	    return em.createQuery("from " + clazz.getSimpleName(), clazz)
+	    		.setFirstResult(primeiraPosicao)
+	    		.setMaxResults(maximoResultado)
+	    		.getResultList();
+	}
+	
 	@Override
 	public void alterar(T entity) {
 		em.merge(entity);

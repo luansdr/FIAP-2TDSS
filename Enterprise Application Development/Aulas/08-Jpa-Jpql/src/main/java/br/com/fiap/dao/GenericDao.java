@@ -14,4 +14,6 @@ public interface GenericDao<T,K> {
 	void salvar() throws CommitException;
 	List<T> listar();
 	
+	List<T> listar(int maxResultado, int primeiraPosicao);
+	
 }

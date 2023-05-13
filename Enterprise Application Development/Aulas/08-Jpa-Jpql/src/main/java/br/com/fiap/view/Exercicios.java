@@ -34,7 +34,13 @@ public class Exercicios {
 
 		// Exibir os nomes dos clientes
 		c.forEach(r -> System.out.println(r.getNome()));
+		c = daoCliente.listar(2,2);
 		System.out.println("\n\n");
+		c.forEach(r -> System.out.println(r.getNome()));
+		System.out.println("\n\n");
+		
+		
+		
 
 //		3. Obter todos os pacotes por um transporte específico (objeto transporte);
 
