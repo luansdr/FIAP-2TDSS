@@ -67,6 +67,17 @@ public class Exercicios2 {
 		c = daoCliente.buscarPorEstados(cs);
 		c.forEach(cl -> System.out.println(cl.getNome() + " -> Estado: " + cl.getEndereco().getCidade().getUf()));
 		
+//		4. Contar a quantidade de clientes de um estado especifico
+			
+		System.out.println("---------------------- Exercicio 4 ----------------------");
+		
+	
+		
+		String estado = "SP";
+		int quantidadeClientes = daoCliente.contarPorEstado(estado);
+		System.out.println("Quantidade de clientes " + estado + ": " + quantidadeClientes);
+
+		
 		
 	}
 

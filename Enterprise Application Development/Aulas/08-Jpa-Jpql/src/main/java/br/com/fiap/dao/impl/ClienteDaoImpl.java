@@ -33,17 +33,26 @@ public class ClienteDaoImpl extends GenericDaoImpl<Cliente, Integer> implements 
 
 	@Override
 	public List<Cliente> buscar(String nome, String cidade) {
-	    return em.createQuery("from Cliente c where c.nome = :nome and c.endereco.cidade.nome = :cidade", Cliente.class)
-	            .setParameter("nome", nome)
-	            .setParameter("cidade", cidade)
+	    return em.createQuery("from Cliente c where upper(c.nome) like upper(:nome) and upper(c.endereco.cidade.nome) like upper(:cidade)", Cliente.class)
+	            .setParameter("nome", "%" + nome + "%")
+	            .setParameter("cidade", "%" + cidade + "%")
 	            .getResultList();
 	}
 
 	@Override
 	public List<Cliente> buscarPorEstados(List<String> estados) {
-		return em.createQuery("from Cliente c where c.endereco.cidade.uf in (:estados)", Cliente.class)
-	            .setParameter("estados", estados)
+		estados.forEach(c -> c.toUpperCase());
+		return em.createQuery("from Cliente c where upper(c.endereco.cidade.uf) in :estados", Cliente.class)
+				.setParameter("estados", estados)
 	            .getResultList();
+	}
+
+	@Override
+	public int contarPorEstado(String estado) {
+	    return em.createQuery("select count(c) from Cliente c where c.endereco.cidade.uf = :estado", Long.class)
+	             .setParameter("estado", estado)
+	             .getSingleResult()
+	             .intValue();
 	}
 
 }
