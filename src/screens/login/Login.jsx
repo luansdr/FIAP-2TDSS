@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from "react";
 import {
-  TextInput,
-  StyleSheet,
-  StatusBar,
-  TouchableOpacity,
-  Text,
-  View,
+    StyleSheet, Text,
+    View
 } from "react-native";
 
 export default function Login() {
   return (
     <View style={styles.container}>
-      <View>Login</View>
-
-      <TouchableOpacity style={styles.buttonCalcular}>
-        <Text style={styles.textoButton}>Calcular IMC</Text>
-      </TouchableOpacity>
-
-      <StatusBar style="auto" />
+        <Text>Teste</Text>
     </View>
   );
 }

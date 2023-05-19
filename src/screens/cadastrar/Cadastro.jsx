@@ -5,13 +5,13 @@ export default function Cadastro() {
   return (
     <View>
       <Text>Cadastrar</Text>
-      <View>
+      {/* <View>
         <TextInput 
           placeholder={"Username"}
           value={"a"}
           onChangeText={""}
         />
-      </View>
+      </View> */}
 
       {/* <View>
         <InputText placeholder={"Email"} />
