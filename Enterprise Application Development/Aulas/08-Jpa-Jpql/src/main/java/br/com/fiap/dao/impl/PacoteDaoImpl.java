@@ -38,6 +38,15 @@ public class PacoteDaoImpl extends GenericDaoImpl<Pacote,Integer> implements Pac
 	            .getResultList();
 	}
 
+	@Override
+	public Double somaDePrecoPorTransporteEspeficio(Transporte transporte) {
+		em.persist(transporte);
+		return em.createQuery("select sum(p.preco) from Pacote p where p.transporte = :transporte", Double.class)
+				.setParameter("transporte", transporte)
+				.getSingleResult();
+				
+	}
+
 	
 
 }

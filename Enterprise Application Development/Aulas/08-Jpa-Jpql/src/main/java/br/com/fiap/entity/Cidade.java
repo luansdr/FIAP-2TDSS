@@ -8,10 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name="TB_EAD_CIDADE")
 @SequenceGenerator(name="seqCidade", sequenceName="SEQ_TB_EAD_CIDADE", allocationSize=1)
 public class Cidade {
+
 
 	@Id
 	@Column(name="cd_cidade")

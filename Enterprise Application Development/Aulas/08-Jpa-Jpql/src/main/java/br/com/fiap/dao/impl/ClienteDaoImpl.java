@@ -48,11 +48,19 @@ public class ClienteDaoImpl extends GenericDaoImpl<Cliente, Integer> implements 
 	}
 
 	@Override
-	public int contarPorEstado(String estado) {
+	public Long contarPorEstado(String estado) {
 	    return em.createQuery("select count(c) from Cliente c where c.endereco.cidade.uf = :estado", Long.class)
 	             .setParameter("estado", estado)
 	             .getSingleResult()
-	             .intValue();
+	             .longValue();
+	}
+
+	@Override
+	public Cliente buscarPorCpf(String cpf) {
+		return em.createNamedQuery("Cliente.PorCpf", Cliente.class)
+		.setParameter("cpf", cpf)
+		.getSingleResult();
+
 	}
 
 }

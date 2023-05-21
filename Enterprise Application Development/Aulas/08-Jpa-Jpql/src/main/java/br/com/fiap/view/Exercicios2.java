@@ -11,10 +11,13 @@ import javax.persistence.EntityManager;
 
 import br.com.fiap.dao.ClienteDao;
 import br.com.fiap.dao.PacoteDao;
+import br.com.fiap.dao.TransporteDao;
 import br.com.fiap.dao.impl.ClienteDaoImpl;
 import br.com.fiap.dao.impl.PacoteDaoImpl;
+import br.com.fiap.dao.impl.TransporteDaoImpl;
 import br.com.fiap.entity.Cliente;
 import br.com.fiap.entity.Pacote;
+import br.com.fiap.entity.Transporte;
 import br.com.fiap.singleton.EntityManagerFactorySingleton;
 
 public class Exercicios2 {
@@ -67,18 +70,47 @@ public class Exercicios2 {
 		c = daoCliente.buscarPorEstados(cs);
 		c.forEach(cl -> System.out.println(cl.getNome() + " -> Estado: " + cl.getEndereco().getCidade().getUf()));
 		
+		System.out.println("\n\n");
+		
 //		4. Contar a quantidade de clientes de um estado especifico
 			
 		System.out.println("---------------------- Exercicio 4 ----------------------");
 		
 	
 		
-		String estado = "SP";
-		int quantidadeClientes = daoCliente.contarPorEstado(estado);
+		String estado = "BA";
+		Long quantidadeClientes = daoCliente.contarPorEstado(estado);
 		System.out.println("Quantidade de clientes " + estado + ": " + quantidadeClientes);
 
+		System.out.println("\n\n");
+		
+//		5. A soma dos preços dos pacotes por um transporte específico;
+
+		System.out.println("---------------------- Exercicio 5 ----------------------");
+		
+		
+		TransporteDao transporteDao = new TransporteDaoImpl(em);
+		Transporte transporte = transporteDao.pesquisar(1);
+		PacoteDao daoPacote = new PacoteDaoImpl(em);
+		
+		Double valorTotal = daoPacote.somaDePrecoPorTransporteEspeficio(transporte);
+		
+		System.out.println("Valor total dos pacote pela empresa:  " + transporte.getEmpresa() + ": " + valorTotal);
+		
+		System.out.println("\n\n");
+		
+		
+		System.out.println("---------------------- NamedQuerys ----------------------");
+		
+		Cliente clienteNamedQueryPorCpf = daoCliente.buscarPorCpf("98728018736"); 
+		
+		System.out.println("Usando namedQuery: " + clienteNamedQueryPorCpf.getNome() + " CPF: " + clienteNamedQueryPorCpf.getCpf());
+		
+		System.out.println("\n\n");
+		
 		
 		
 	}
+	
 
 }
