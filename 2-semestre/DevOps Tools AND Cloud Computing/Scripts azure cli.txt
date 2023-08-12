@@ -1,0 +1,173 @@
+-- CRIAR UMA VM 
+
+##Variáveis
+grupox="rg-lnx-new-tech" &&
+locationx="brazilsouth" &&
+##Criação do grupo de serviços
+az group create --name$grupox --location $locationx &&
+##Dados da VM
+echo "informe o nome da VM:" &&
+read vmnamex &&
+echo "Escolha o tipo da imagem:" &&
+select vmtypex in "Oracle 7.6" "Ubuntu 20" "Kali Linux"; do case $vmtypex in "Oracle 7.6") export
+vmtypex="Oracle:Oracle-Linux:7.6:7.6.2";;"Ubuntu 20") export vmtypex="Canonical:0001-com-ubuntu-server-focal:20_04-lts:20.04.202010140";; "Kali Linux") export vmtypex="kali-linux:kali-linux:kali:2019.2.0";;esac; break;
+done &&
+echo "Informe o tamanho do disco (Em GB - somente numeros):" &&
+read disksizex &&
+echo "Informe o usuário:" &&
+read usuariox &&
+echo "informe a senha:" &&
+read senhax &&
+az vm create --resource-group $grupox --name $vmnamex --image $vmtypex --size Standard_B1ms --data-disk-sizes-gb $disksizex --storage-sku Standard_LRS --admin-username $usuariox -- admin-password $senhax
+
+
+
+
+-- Criar um web APP
+
+##Variáveis do script
+rg=rg-app-quiz &&
+location=brazilsouth &&
+appServicePlanName=plan-app-quiz &&
+webAppName=appquizrm94898 &&
+codigoFonte=https://github.com/profjoaomenk/jsQuiz.git &&
+sku=f1 &&
+##Cria um nome grupo de recursos
+az group create --name $rg --location $location &&
+##Cria um novo plano de serviço para o APP
+az appservice plan create --name $appServicePlanName \
+--location $location \
+--resource-group $rg \
+--sku $sku &&
+##Cria um novo servico de aplicativo
+az webapp create -g $rg \
+-p $appServicePlanName \
+-n $webAppName \
+--deployment-source-url $codigoFonte
+
+
+-- Limpar tudo da labs
+
+az group delete --name rg-vmububtu -y &&
+az group delete --name NetworkWatcherRG -y &&
+az group delete --name rg-lnx-new-tech -y &&
+az group delete --name rg-app-quiz -y &&
+az group delete --name cloud-shell-storage-eastus -y 
+
+
+
+-- criando instancia ubuntu com interface gráfica
+#!/bin/bash
+
+# Variáveis
+grupox="rg-lnx-new-tech"
+locationx="brazilsouth"
+vmnamex="my-free-vm"
+vmtypex="Canonical:UbuntuServer:18.04-LTS:latest"  # Imagem do Ubuntu 18.04 LTS
+disksizex=30  # Tamanho do disco em GB
+usuariox="rm94898"  # Nome do usuário
+senhax="rm94898@123456"  # Senha do usuário (Substitua pela sua senha)
+
+# Criação do grupo de serviços (somente se ainda não existir)
+az group create --name $grupox --location $locationx --output none
+
+# Verifica se o nome da VM já está em uso, e gera um novo nome caso esteja
+while [ "$(az vm show -g $grupox -n $vmnamex --query "name" -o tsv 2>/dev/null)" ]; do
+    vmnamex="vm-$(date +%Y%m%d%H%M%S)"
+done
+
+# Criação da VM usando a camada gratuita (Free Tier) com interface gráfica
+az vm create \
+  --resource-group $grupox \
+  --name $vmnamex \
+  --image $vmtypex \
+  --size Standard_B1s \
+  --data-disk-sizes-gb $disksizex \
+  --storage-sku Standard_LRS \
+  --admin-username $usuariox \
+  --admin-password $senhax \
+  --custom-data cloud-init.txt  # Script cloud-init para instalação da interface gráfica
+
+# Abrir as portas 22 (SSH) e 3389 (RDP) para permitir conexões SSH e acesso à interface gráfica
+az vm open-port --port 22 --resource-group $grupox --name $vmnamex --priority 1000
+az vm open-port --port 3389 --resource-group $grupox --name $vmnamex --priority 1010
+
+# Imprimir informações da VM
+az vm show --resource-group $grupox --name $vmnamex --show-details --query "{PublicIP: publicIps, PrivateIP: privateIps, Username: osProfile.adminUsername, Password: osProfile.adminPassword}"
+
+# Aguardar alguns segundos para que a VM seja totalmente provisionada
+echo "Aguarde alguns segundos para a VM ser totalmente provisionada..."
+sleep 60
+
+# Acessar a VM via SSH para abrir o ambiente gráfico
+ssh $usuariox@<IP-PUBLICO-VM> 'sudo apt update && sudo apt install ubuntu-desktop -y'
+
+# Conectar-se à interface gráfica da VM (usando um cliente RDP como o "Remote Desktop Connection" no Windows)
+echo "Acesse a interface gráfica da VM usando um cliente RDP (Remote Desktop Protocol). Use o IP Público da VM e as credenciais de usuário para se conectar."
+
+
+
+pra excluir
+
+
+
+Atividades - 
+
+01) Crie 2 Grupos de Recursos: rg-dimdim e rg-vendebem no Portal do
+Microsoft Azure
+
+script para gerar recursos na azure
+
+##Variáveis
+recurso1="rg-dimdim" &&
+recurso2="rg_vendebem &&
+locationx="brazilsouth" &&
+##Criação do grupo de serviços
+az group create --name$recurso1 --location $locationx &&
+az group create --name$recurso2 --location $locationx &&
+##Listagem
+az group list
+
+
+
+
+02) Exibe detalhes de um Grupo de Recurso
+
+echo "Entre com o nome do Grupo de Recursos:" &&
+read resourceGroupName&&
+az group show --name $resourceGroupName
+
+
+
+
+
+
+
+
+
+# Armazenar a lista de nomes dos grupos de recursos em uma variável
+resourceGroupNames=$(az group list --query "[].name" -o tsv)
+resourceGroupNames+=" EXCLUIR_TODOS";
+
+
+# Exibir o menu de seleção
+echo "Escolha o Grupo de Recursos:"
+select resourceGroupName in $resourceGroupNames; do
+    case $resourceGroupName in
+        *)
+            echo "Grupo de Recursos selecionado: $resourceGroupName"
+            break
+            ;;
+    esac
+done
+
+
+
+
+
+# Solicitar ao usuário o nome do Grupo de Recursos a ser deletado
+echo "Entre com o nome do Grupo de Recursos que deseja deletar:"
+read resourceGroupName
+
+# Deletar o Grupo de Recursos
+az group delete --name $resourceGroupName
