@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-Program",
+      "appliesTo": "2-semestre/Enterprise Application Development/workspace/Fiap.HelloWorld/Fiap.HelloWorld.IU/Program.cs",
+      "type": "launch"
+    }
+  ]
+}
