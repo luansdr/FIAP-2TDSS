@@ -1,0 +1,28 @@
+﻿@model Personagem
+@{
+    ViewData["Title"] = "Cadastrar personagem";
+}
+
+<div>
+    <h2>Cadastrar Personagem</h2>
+    <form asp-action="cadastrar" asp-controller="personagem" method="post">
+        <div class="mb-3">
+            <label asp-for="Nome"></label>
+            <input class="form-control" asp-for="Nome" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="NivelEnergia"></label>
+            <input class="form-control" asp-for="NivelEnergia" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Capa"></label>
+            <input asp-for="Capa" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DataCriacao"></label>
+            <input class="form-control" asp-for="DataCriacao" />
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+
