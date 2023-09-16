@@ -1,5 +1,12 @@
 {
-  "ExpandedNodes": [],
-  "SelectedNode": "\\Fiap.HelloWorld.sln",
+  "ExpandedNodes": [
+    "",
+    "\\2-semestre",
+    "\\2-semestre\\Enterprise Application Development",
+    "\\2-semestre\\Enterprise Application Development\\workspace",
+    "\\2-semestre\\Enterprise Application Development\\workspace\\Fiap.HelloWorld",
+    "\\2-semestre\\Enterprise Application Development\\workspace\\Fiap.HelloWorld\\Fiap.Exercicio01"
+  ],
+  "SelectedNode": "\\2-semestre\\Enterprise Application Development\\workspace\\Fiap.HelloWorld\\Fiap.Exercicio01\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
