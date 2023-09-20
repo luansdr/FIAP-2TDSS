@@ -16,6 +16,41 @@ namespace Fiap.Web.Aula02.Controllers
             return View(_lista);
         }
 
+
+        [HttpPost]
+        public IActionResult Excluir(int id)
+        {
+            // Encontre o personagem com o ID especificado na lista
+            var personagemParaExcluir = _lista.FirstOrDefault(p => p.Id == id);
+
+            if (personagemParaExcluir != null)
+            {
+                // Remova o personagem da lista
+                _lista.Remove(personagemParaExcluir);
+            }
+
+            // Redirecione de volta para a página Index
+            return RedirectToAction("Index");
+        }
+
+        [HttpPut]
+        public IActionResult Atualizar(int id, Personagem dadosAtualizados)
+        {
+            var personagemParaAtualizar = _lista.FirstOrDefault(p => p.Id == id);
+
+            if (personagemParaAtualizar != null)
+            {
+                personagemParaAtualizar.Nome = dadosAtualizados.Nome;
+                personagemParaAtualizar.NivelEnergia = dadosAtualizados.NivelEnergia;
+                personagemParaAtualizar.Capa = dadosAtualizados.Capa;
+
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
+
+
         [HttpGet]
         public IActionResult Cadastrar()
         {
@@ -33,7 +68,7 @@ namespace Fiap.Web.Aula02.Controllers
 
                 ModelState.Clear();
                 ViewBag.personagens = _lista;
-                return RedirectToAction("Cadastrar");
+                return RedirectToAction("");
             }
 
             return View();

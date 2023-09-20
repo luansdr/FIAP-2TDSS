@@ -4,6 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+}
+
 <h1>Lista de Personagens</h1>
 
 @if (Model.Count > 0)
@@ -17,6 +26,7 @@
                     <th>Nível de Energia</th>
                     <th>Possui Capa</th>
                     <th>Data de Criação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +38,123 @@
                         <td>@personagem.NivelEnergia</td>
                         <td>@(personagem.Capa ? "Sim" : "Não")</td>
                         <td>@personagem.DataCriacao</td>
+                        <td>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#editarModal-@personagem.Id">
+                                Editar
+                            </button>
+                            <button class="btn btn-danger" onclick="excluirPersonagem(@personagem.Id)">
+                                Excluir
+                            </button>
+                        </td>
                     </tr>
+
+                    <!-- Modal de Edição para o Personagem -->
+                    <div class="modal fade" id="editarModal-@personagem.Id" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editarModalLabel">Editar Personagem</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Formulário de Edição do Personagem -->
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="id-@personagem.Id">Id</label>
+                                            <input type="text" class="form-control" id="Id-@personagem.Id" value="@personagem.Id">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nome-@personagem.Id">Nome</label>
+                                            <input type="text" class="form-control" id="nome-@personagem.Id" value="@personagem.Nome">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nivelEnergia-@personagem.Id">Nível de Energia</label>
+                                            <input type="text" class="form-control" id="nivelEnergia-@personagem.Id" value="@personagem.NivelEnergia">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="capa-@personagem.Id">Possui Capa</label>
+                                            <input type="checkbox" id="capa-@personagem.Id" @(personagem.Capa ? "checked" : "")>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dataCriacao-@personagem.Id">Data Criaçao</label>
+                                            <input type="date" class="form-control" id="nome-@personagem.DataCriacao" value="@personagem.DataCriacao">
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-primary" onclick="salvarEdicao(@personagem.Id)">Salvar Alterações</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
             </tbody>
         </table>
     </div>
 }
+
+<script>
+    function excluirPersonagem(id) {
+        if (confirm("Tem certeza de que deseja excluir este personagem?")) {
+            fetch(`/Personagem/Excluir?id=${id}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // A exclusão foi bem-sucedida, então recarregue a página ou atualize a tabela
+                        location.reload();
+                    } else {
+                        alert("Não foi possível excluir o personagem.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao excluir o personagem:", error);
+                    alert("Não foi possível excluir o personagem.");
+                });
+        }
+    }
+
+    function salvarEdicao(id) {
+        // Obtenha os valores dos campos de edição
+        var nome = $("#nome-" + id).val();
+        var nivelEnergia = $("#nivelEnergia-" + id).val();
+        var capa = $("#capa-" + id).prop("checked");
+
+        // Envie os dados para a API de edição (substitua pela sua lógica)
+        var data = {
+            id: id,
+            nome: nome,
+            nivelEnergia: nivelEnergia,
+            capa: capa
+        };
+
+        fetch(`/Personagem/Editar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    // A edição foi bem-sucedida, então feche o modal e atualize a tabela
+                    $("#editarModal-" + id).modal("hide");
+                    location.reload();
+                } else {
+                    alert("Não foi possível salvar as alterações.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao salvar as alterações:", error);
+                alert("Não foi possível salvar as alterações.");
+            });
+    }
+</script>
