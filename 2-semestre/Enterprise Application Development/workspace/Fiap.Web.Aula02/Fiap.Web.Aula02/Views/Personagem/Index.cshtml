@@ -59,7 +59,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <!-- Formulário de Edição do Personagem -->
+  
                                     <form>
                                         <div class="form-group">
                                             <label for="id-@personagem.Id">Id</label>
@@ -78,10 +78,9 @@
                                             <input type="checkbox" id="capa-@personagem.Id" @(personagem.Capa ? "checked" : "")>
                                         </div>
                                         <div class="form-group">
-                                            <label for="dataCriacao-@personagem.Id">Data Criaçao</label>
-                                            <input type="date" class="form-control" id="nome-@personagem.DataCriacao" value="@personagem.DataCriacao">
+                                            <label for="dataCriacao-@personagem.Id">dataCriacao</label>
+                                            <input type="date" class="form-control" id="dataCriacao-@personagem.Id" value="@personagem.DataCriacao">
                                         </div>
-
 
                                     </form>
                                 </div>
@@ -127,16 +126,18 @@
         var nome = $("#nome-" + id).val();
         var nivelEnergia = $("#nivelEnergia-" + id).val();
         var capa = $("#capa-" + id).prop("checked");
+        var dataCriacao = $("#dataCriacao-" + id).val();
 
         // Envie os dados para a API de edição (substitua pela sua lógica)
         var data = {
             id: id,
             nome: nome,
             nivelEnergia: nivelEnergia,
-            capa: capa
+            capa: capa,
+            dataCriacao: dataCriacao // Use dois pontos (:) em vez de um sinal de igual (=)
         };
 
-        fetch(`/Personagem/Editar`, {
+        fetch(`/Personagem/Atualizar?id=${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

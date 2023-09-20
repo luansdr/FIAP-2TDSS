@@ -33,8 +33,8 @@ namespace Fiap.Web.Aula02.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPut]
-        public IActionResult Atualizar(int id, Personagem dadosAtualizados)
+        [HttpPost]
+        public IActionResult Atualizar(int id, [FromBody] Personagem dadosAtualizados)
         {
             var personagemParaAtualizar = _lista.FirstOrDefault(p => p.Id == id);
 
